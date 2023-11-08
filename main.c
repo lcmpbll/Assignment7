@@ -8,8 +8,43 @@
 # Output:           int  []
 # Sources:          None
 ******************************************************************************/
+// Declare functions
+int GetMaxInt(int listInts[20], int numVals);
+int * SubtractFromArray(int listInts[20], int normedValues[20], int numVals, int valueToSub);
 
-#include GetMaxInt
+int main(void) {
+  const int NUM_ELEMENTS = 20;
+  int userValues[NUM_ELEMENTS];
+  int normalizedValues[NUM_ELEMENTS];
+  int numberOfInputs, normalizeValue;
+
+  printf("Welcome to my Normalizing Data Sets Program!\n\n");
+  printf("Enter the number of integers followed by the integers: \n");
+  // Get total number of inputs and scanf that number.
+  scanf("%d", &numberOfInputs);
+  if(numberOfInputs < 21){
+    for(int i = 0; i < numberOfInputs; i++){
+      scanf("%d", &userValues[i]);
+    }
+  
+    printf("\n");
+    //Get the maximum value form inputted data set.
+    normalizeValue = GetMaxInt(userValues, numberOfInputs);
+    //Returns the normalized values to normalizedValues array
+    SubtractFromArray(userValues, normalizedValues, numberOfInputs, normalizeValue);
+    // Output answer
+    printf("The normalized data set is: \n");
+    for(int i = 0; i < numberOfInputs; i++){
+      printf("%d ", normalizedValues[i]);
+    }
+  } else {
+    printf("Please enter fewer than 20 data points.\n");
+  }
+  printf("\n\nThank you for using my program!\n");
+  return 0;
+}
+
+// Define functions
 int GetMaxInt(int listInts[20], int numVals) {
   int largestNumber;
   // Set largestNumber to first array value
@@ -25,21 +60,11 @@ int GetMaxInt(int listInts[20], int numVals) {
   return largestNumber;
 }
 
-int main(void) {
-  const int NUM_ELEMENTS = 20;
-  int userValues[NUM_ELEMENTS];
-  int numberOfInputs, normalizeValue;
-  
-
-  scanf("%d", &numberOfInputs);
-  for(int i = 0; i < numberOfInputs; i++){
-    scanf("%d", &userValues[i]);
+int * SubtractFromArray(int listInts[20], int normedValues[20], int numVals, int valueToSub) {
+  // Subtract valueToSub from each value in list.
+  for(int i = 0; i < numVals; i++){
+    normedValues[i] = valueToSub - listInts[i];
   }
-  
-  normalizeValue = GetMaxInt(userValues, numberOfInputs);
-
-  
-  
-  
-  return 0;
+  // Returns pointer to normedValues array.
+  return normedValues;
 }
